@@ -1,0 +1,390 @@
+@use 'base'
+
+.deal-thumb
+	@extend %no-select
+	@extend %font-global
+	// box-sizing: border-box
+	display: flex
+	flex-direction: row
+	flex-wrap: nowrap
+	align-items: flex-start
+	padding: 0px
+	margin: 0px
+	flex: none
+	flex-basis: 100%
+	overflow: visible
+	// max-width: 400px
+	// min-width: 200px
+	// height: 300px
+
+
+
+
+/* Portrait and Landscape */
+// @media only screen and (max-device-width: 375px) and (-webkit-min-device-pixel-ratio: 2)
+	// .deal-thumb
+	// 	width: 100%
+
+
+
+.deal-thumb[data-status = 'pending']
+	.deal-thumb__base
+		background: #FBFBFB
+		box-shadow: none !important
+		border: 1px dashed #666666
+
+.deal-thumb__base
+	z-index: 10
+	display: flex
+	position: relative
+	left: 0
+	// width: 100%
+	align-self: stretch
+	justify-content: space-between
+	flex: 1
+	flex-grow: 2
+	flex-direction: column
+	background: base.$white
+	border-radius: 6px 6px 0px 0px
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.35)
+	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.35)
+	transition-property: left, box-shadow
+	transition-delay: 0s
+	transition-duration: 0.2s
+	transition-timing-function: ease
+
+.context
+		left: -200px
+		box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5)
+		box-shadow: -6px 4px 16px rgba(0, 0, 0, 0.3)
+
+.deal-thumb__base__status
+	display: flex
+	padding: 3px 3px 0px 10px
+	margin: 0 0 8px 0
+	width: calc(100% - 13px)
+	height: 24px - 3
+
+.deal-thumb__base__status__marker
+	flex: 100%
+	order: 0
+	align-self: stretch
+	flex-grow: 0
+	padding: 3px 0px
+	font-size: 10px
+	line-height: 10px
+	text-align: left
+	&::before
+		content: '●'
+		font-size: 14px
+		line-height: 9px
+		padding: 0 2px 0 0
+
+[data-status = 'sales_on']
+	div.deal-thumb__base__status__marker
+		color: base.$life-green
+
+[data-status = 'sales_off']
+	div.deal-thumb__base__status__marker
+		color: #FEB40B
+
+[data-status = 'pending']
+	div.deal-thumb__base__status__marker
+		color: base.$primary-black
+
+	.deal-thumb__base__content__data__funnel
+		opacity: 50%
+		.daily
+			display: none
+
+.deal-thumb__base__status__top
+	flex: none
+	order: 1
+	flex-grow: 0
+	margin: 0px 0px
+	height: 21px
+	svg path
+		fill: base.$primary-yellow
+
+.deal-thumb__base__content
+	flex: 1
+	order: 1
+	align-self: stretch
+	flex-grow: 0
+	margin: 0px 10px
+
+.deal-thumb__base__content__title
+	font-size: 14px
+	display: block
+	line-height: 17px
+	color: base.$primary-black
+	position: static
+	height: 52px
+	text-align: left
+	padding-bottom: 10px
+	border-bottom: 1px solid base.$life_grey
+
+.deal-thumb__base__content__data
+	flex: 1
+	display: flex
+	order: 2
+	align-self: stretch
+	align-items: flex-start
+	flex-grow: 1
+	// margin: 0px
+	flex-direction: row
+	flex-wrap: nowrap
+	margin: 10px 0
+
+.deal-thumb__base__content__data__dates
+	display: flex
+	flex-direction: column
+	align-items: stretch
+	// padding: 0px
+	align-self: flex-start
+	flex-basis: 130px
+	order: 0
+	flex-grow: 0
+	// min-width: 130px
+	// width: calc((100% - 70%) - 16px)
+	// float: left
+	margin: 0 16px 0 0
+	// margin: 0
+
+.deal-thumb__base__content__data__dates__id
+	font-size: 14px
+	line-height: 17px
+	display: flex
+	align-items: stretch
+	color: base.$primary-blue
+	span
+		text-align: left
+	span.demo
+		color: base.$life-red
+
+.base__content__data__dates__table
+	display: flex
+	flex-direction: row
+	align-items: stretch
+	padding: 0px
+	margin: 8px 0 0 0
+	flex: 1
+
+	span
+		padding-top: 12px
+		align-self: stretch
+		text-align: left
+		&:first-child
+			padding-top: 0
+
+.base__content__data__dates__table__keys
+	display: flex
+	flex-direction: column
+	align-items: flex-start
+	padding: 0px
+
+	flex: none
+	order: 0
+	flex-grow: 0
+	margin: 0px 8px 0px 0px
+
+	font-size: 10px
+	line-height: 13px
+	color: base.$gray-text
+
+.base__content__data__dates__table__values
+	display: flex
+	flex-direction: column
+	align-items: stretch
+	padding: 0px
+	order: 1
+	flex-basis: 68px
+	flex-grow: 0
+
+	font-size: 11px
+	line-height: 13px
+	text-align: right
+	color: base.$primary-black
+
+	span
+		text-align: right
+		flex: 1
+		align-self: stretch
+
+.deal-thumb__base__content__data__funnel
+	display: flex
+	flex-direction: column
+	align-items: stretch
+	flex-grow: 2
+	order: 1
+
+.deal-thumb__base__content__data__funnel__left-title
+	font-family: Tahoma
+	font-style: normal
+	font-weight: normal
+	font-size: 11px
+	line-height: 13px
+	text-align: left
+
+	color: base.$addition-grey
+
+	flex: none
+	order: 0
+	align-self: stretch
+	flex-grow: 0
+	margin: 2px 0
+
+.deal-thumb__base__content__data__funnel__table
+	display: flex
+	flex-direction: column
+	align-items: flex-start
+	padding: 0px
+
+	flex: 1
+	order: 1
+	align-self: stretch
+	flex-grow: 0
+	// margin: 0px 4px
+
+.funnel__stair
+	display: flex
+	flex-direction: row
+	align-items: center
+	padding: 0 0 4px 0
+
+	flex: none
+	order: 0
+	align-self: stretch
+	flex-grow: 0
+	// margin: 0px 4px
+
+.stair__label
+	display: flex
+	flex-direction: row
+	align-items: center
+	padding: 0px 8px 0px 0px
+	order: 0
+
+.label__icon
+	width: 16px
+	height: 16px
+	margin: 0 4px 0 0
+
+	svg path
+		fill: base.$addition-grey
+
+.label__text
+	font-size: 10px
+	line-height: 12px
+	color: base.$gray-text
+
+.summary
+	flex: 1
+	order: 1
+	flex-grow: 1
+	// margin: 4px 0px
+	font-size: 18px
+	line-height: 22px
+	text-align: right
+	color: base.$primary-blue
+
+.daily
+	display: flex
+	flex-direction: row
+	justify-content: flex-end
+	align-items: center
+	padding: 0px
+	font-size: 12px
+	line-height: 14px
+	text-align: right
+	flex: none
+	order: 2
+	flex-basis: 35px
+	margin: 4px 0px
+	color: base.$green-text
+
+div.daily
+	span.up
+		color: base.$green-text
+	span.down
+		color: base.$life-red
+	span.zero
+		color: base.$gray-text
+
+.daily.zero
+	color: base.$gray-text
+
+.daily.plus::before
+	content: '+'
+
+.actions
+	display: flex
+	flex-direction: row
+	align-items: flex-start
+	padding: 0px
+	flex: 1
+	order: 3
+	align-self: stretch
+	flex-grow: 0
+	margin: 16px 0 0 0
+
+	.button
+		display: flex
+		flex-direction: row
+		justify-content: center
+		align-items: center
+		padding: 0px 10px
+		height: 47px
+		flex: 1
+		flex-grow: 1
+		margin: 0px 0px
+		cursor: pointer
+		// &:hover, &:active
+		// 	filter: brightness(1.1)
+
+		svg
+			width: 24px
+			height: 24px
+			flex: none
+			flex-grow: 0
+			margin: 0px 0px
+
+		.label
+			font-size: 12px
+			line-height: 14px
+			display: inline
+			align-items: center
+			text-align: center
+			flex: none
+			flex-grow: 1
+			margin: 0px 0px
+
+		&.up-to-top
+			order: 0
+			background: base.$primary-yellow
+			color: base.$primary-black
+			svg path
+				fill: base.$white
+			&:hover, &:active
+				background: lighten(base.$primary-yellow, 5%)
+
+		&.show-more
+			order: 1
+			background: base.$primary-blue
+			color: base.$white
+			svg path
+				fill: base.$white
+			&:hover, &:active
+				background: lighten(base.$primary-blue, 5%)
+
+		&.preview-on-site
+			order: 2
+			background: base.$gray-text
+			color: base.$white
+			text-transform: uppercase
+			outline: 1px solid base.$gray-text
+			svg path
+				fill: base.$white
+			&:hover, &:active
+				background: lighten(base.$gray-text, 5%)
+				outline-color: lighten(base.$gray-text, 5%)
