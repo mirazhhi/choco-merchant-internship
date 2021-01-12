@@ -22,7 +22,6 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Добро пожаловать во ВуеЖС',
       deals: [
         {
           id:123456,
