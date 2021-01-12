@@ -1,0 +1,20 @@
+{
+	"id": "int",
+	"title": "string",
+	"in_top": "boolean",
+	"published_date": "date",
+	"duration": "int",
+	"activation_lag": "int",
+	"statistic_summary": {
+		"viewed": "int",
+		"buyed": "int",
+		"activated": "int",
+		"raiting": "int",
+	},
+	"statistic_daily": {
+		"viewed": "int",
+		"buyed": "int",
+		"activated": "int",
+		"raiting_ystd": "int",
+	}
+}
