@@ -28,6 +28,13 @@
   border: 1px dashed #666666;
 }
 
+.deal-thumb[data-status=finished] .button.show-more {
+  background: #A6A6A6;
+}
+.deal-thumb[data-status=finished] .button.show-more:hover, .deal-thumb[data-status=finished] .button.show-more:active {
+  background: #b3b3b3;
+}
+
 .deal-thumb__base {
   z-index: 10;
   display: flex;

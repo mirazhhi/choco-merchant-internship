@@ -1,25 +1,3 @@
-# firsproj
-
-> education
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-> open link http://localhost:8080/deals/
-
-## Worked with JSON server (localhost:3000)
-[link to JSON Server](https://github.com/typicode/json-server)
-
-``` json
 {
    "deals":[
       {
@@ -124,7 +102,3 @@ npm run build
       }
    ]
 }
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# vue_test_repo

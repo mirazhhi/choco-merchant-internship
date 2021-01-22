@@ -1,43 +1,18 @@
 <template>
   <div id="app" class="app">
-    <div class="deals-list">
-
-
-    <!-- <app-coupon></app-coupon>
-				<app-work-sheduller></app-work-sheduller> -->
-		<deal-thumbnail
-    v-for="deal in deals"
-    :deal="deal"
-    :key="deal.id"
-    ></deal-thumbnail>
-    </div>
-    <!-- <div class="">
-
-    </div> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
+  export default {
+    name: 'app',
+    data () {
+      return {
 
-  data () {
-    return {
-      deals: []
+      }
     }
-  },
-  mounted: function() {
-    fetch('http://localhost:3000/deals?in_top=false')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.deals = data
-      })
-  },
-};
-
-
+  };
 </script>
 
 <style scoped>

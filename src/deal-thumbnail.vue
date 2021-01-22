@@ -118,152 +118,161 @@
         </div>
       </div>
     </div>
-    <deal-context-menu
+    <DealContextMenu
     v-if="status != 'pending'"
     :data-status="createLabel(deal)"
     :class="{'visible': context}"
-    ></deal-context-menu>
+    ></DealContextMenu>
   </div>
 </template>
 
 <!-- <script src="./hammer.min.js"></script> -->
 <script>
-// import "./hammer.min.js"
-export default {
-  props: {
-    deal: {
-      type: Object,
-      default: function() {
-        return {
-          id:0,
-          title:'Демонстрационная акция! Изучи функционал мерчант кабинета на этом примере.',
-          in_top:false,
-          published_date:'January 30, 2020 00:00:00 GMT+06:00',
-          duration:360,
-          activation_lag:30,
-          statistic_summary: {
-            viewed:0,
-            buyed:0,
-            activated:0,
-            raiting:0,
-          },
-          statistic_daily:{
-            viewed:0,
-            buyed:0,
-            activated:0,
-            raiting_ystd:0,
+	import DealContextMenu from './deal_context-menu.vue'
+
+  export default {
+    components: { DealContextMenu },
+    props: {
+      deal: {
+        type: Object,
+        default: function() {
+          return {
+            id:0,
+            title:'Демонстрационная акция! Изучи функционал мерчант кабинета на этом примере.',
+            in_top:false,
+            published_date:'January 30, 2020 00:00:00 GMT+06:00',
+            duration:360,
+            activation_lag:30,
+            statistic_summary: {
+              viewed:0,
+              buyed:0,
+              activated:0,
+              raiting:0,
+            },
+            statistic_daily:{
+              viewed:0,
+              buyed:0,
+              activated:0,
+              raiting_ystd:0,
+            }
           }
         }
       }
-    }
-  },
-  data: function() {
-    return {
-      context: false,
-      status: '',
-      icons: {
+    },
+    data: function() {
+      return {
+
+        context: false,
+        status: '',
+        icons: {
+        },
+        date_format:{
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        },
+        locale:'ru-RU',
+        state_labels: {
+          sales_off:'продажи завершены',
+          sales_on:'продажи открыты',
+          finished:'акция завершена',
+          pending:'акция не опубликована',
+          demo:'демонстрационная',
+        },
+  		}
+    },
+    // created() {
+    //   const film = films.find(film => film.id == this.$route.params.id)
+    //   if (film) {
+    //     this.film = film
+    //   }
+    // },
+    mounted: function() {
+      this.status = this.$el.getAttribute('data-status')
+      // console.log(this.status)
+
+      // let recaptchaScript = document.createElement('script')
+      //   recaptchaScript.setAttribute('src', './hammer.min.js')
+      //   document.head.appendChild(Hammer)
+    },
+    methods: {
+      menu: function(event) {
+        // event.target.setAttribute('clicked', '1')
+        // console.log(id)
+        // var workday = this.week[index].workday
+        this.context = !this.context
+        // console.log(this.week[index].full)
+        // console.log(this.week)
       },
-      date_format:{
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
+      zero: function(deal, param) {
+        // console.log(param + deal.statistic_daily[param]);
+        if (deal.statistic_daily[param] == 0) {
+          return 'zero'
+        }
+        else {
+          return 'plus'
+        }
       },
-      locale:'ru-RU',
-      state_labels: {
-        sales_off:'продажи завершены',
-        sales_on:'продажи открыты',
-        finished:'акция завершена',
-        pending:'акция не опубликована',
-        demo:'демонстрационная',
+      createLabel: function(d) {
+        var now = Date.now()
+        var publ = new Date(d.published_date).getTime()
+        // console.log((now - publ)/1000/60/60/24)
+        var different = Math.floor((now - publ)/1000/60/60/24)
+        if (different <= d.duration && different >= 0) {
+          return 'sales_on'
+        }
+        else if (different >= d.duration && different <= (d.duration + d.activation_lag)) {
+          return 'sales_off'
+        }
+        else if (different < 0) {
+          return 'pending'
+        }
+        else return 'finished'
       },
-		}
-  },
-  mounted: function() {
-    this.status = this.$el.getAttribute('data-status')
-    // console.log(this.status)
+      launchDate: function(publ) {
+        var convertPublic = new Date(publ)
+        return convertPublic.toLocaleString(this.locale, this.date_format)
+      },
+      activationDate: function(publ, duration, lag) {
+        var convertPublic = new Date(publ).getTime()
+        var convertedDur = new Date(convertPublic + (duration*1000*60*60*24)).getTime()
+        var convertedLag = new Date(convertedDur + (lag*1000*60*60*24))
+        // console.log(convertedLag)
+        return convertedLag.toLocaleString(this.locale, this.date_format)
+      },
+      finishedDate: function(publ, duration) {
+        var convertPublic = new Date(publ).getTime()
+        var convertedDur = new Date(convertPublic + (duration*1000*60*60*24))
+        return convertedDur.toLocaleString(this.locale, this.date_format)
+      },
+      onSales: function(publ) {
+        var convertPublic = new Date(publ).getTime()
+        var diff = (Date.now() - convertPublic)/1000/60/60/24
+        if (diff > 0) {
+          return Math.floor(diff)
+        }
+        else return '—'
+      },
+      rateDymanic: function(td, ystd) {
+        var different = (td*100 - ystd*100)/100
+        // console.log(different)
+        if (different > 0) {
+          return ('<span class="up">▴ ' + different + '</span>')
+        }
+        else if (different < 0) {
+          return ('<span class="down">▾ ' + Math.abs(different) + '</span>')
+        }
+        else return ('<span class="zero">–</span>')
+      }
+    },
+    computed: {
 
-    // let recaptchaScript = document.createElement('script')
-    //   recaptchaScript.setAttribute('src', './hammer.min.js')
-    //   document.head.appendChild(Hammer)
-  },
-  methods: {
-    menu: function(event) {
-      // event.target.setAttribute('clicked', '1')
-      // console.log(id)
-      // var workday = this.week[index].workday
-      this.context = !this.context
-      // console.log(this.week[index].full)
-      // console.log(this.week)
     },
-    zero: function(deal, param) {
-      // console.log(param + deal.statistic_daily[param]);
-      if (deal.statistic_daily[param] == 0) {
-        return 'zero'
-      }
-      else {
-        return 'plus'
-      }
-    },
-    createLabel: function(d) {
-      var now = Date.now()
-      var publ = new Date(d.published_date).getTime()
-      // console.log((now - publ)/1000/60/60/24)
-      var different = Math.floor((now - publ)/1000/60/60/24)
-      if (different <= d.duration && different >= 0) {
-        return 'sales_on'
-      }
-      else if (different >= d.duration && different <= (d.duration + d.activation_lag)) {
-        return 'sales_off'
-      }
-      else if (different < 0) {
-        return 'pending'
-      }
-      else return 'finished'
-    },
-    launchDate: function(publ) {
-      var convertPublic = new Date(publ)
-      return convertPublic.toLocaleString(this.locale, this.date_format)
-    },
-    activationDate: function(publ, duration, lag) {
-      var convertPublic = new Date(publ).getTime()
-      var convertedDur = new Date(convertPublic + (duration*1000*60*60*24)).getTime()
-      var convertedLag = new Date(convertedDur + (lag*1000*60*60*24))
-      // console.log(convertedLag)
-      return convertedLag.toLocaleString(this.locale, this.date_format)
-    },
-    finishedDate: function(publ, duration) {
-      var convertPublic = new Date(publ).getTime()
-      var convertedDur = new Date(convertPublic + (duration*1000*60*60*24))
-      return convertedDur.toLocaleString(this.locale, this.date_format)
-    },
-    onSales: function(publ) {
-      var convertPublic = new Date(publ).getTime()
-      var diff = (Date.now() - convertPublic)/1000/60/60/24
-      if (diff > 0) {
-        return Math.floor(diff)
-      }
-      else return '—'
-    },
-    rateDymanic: function(td, ystd) {
-      var different = (td*100 - ystd*100)/100
-      // console.log(different)
-      if (different > 0) {
-        return ('<span class="up">▴ ' + different + '</span>')
-      }
-      else if (different < 0) {
-        return ('<span class="down">▾ ' + Math.abs(different) + '</span>')
-      }
-      else return ('<span class="zero">–</span>')
-    }
-  },
-  computed: {
 
-  },
+    watch: {
+    },
 
-  watch: {
-  },
-
-};
+  };
 
 </script>
 

@@ -91,7 +91,7 @@ export default {
   },
   mounted: function() {
     this.status = this.$el.getAttribute('data-status')
-    console.log(this.status)
+    // console.log(this.status)
   },
 };
 </script>
