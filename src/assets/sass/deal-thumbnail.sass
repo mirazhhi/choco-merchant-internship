@@ -87,15 +87,15 @@
 		padding: 0 2px 0 0
 
 [data-status = 'sales_on']
-	div.deal-thumb__base__status__marker
+	.deal-thumb__base__status__marker
 		color: base.$life-green
 
 [data-status = 'sales_off']
-	div.deal-thumb__base__status__marker
+	.deal-thumb__base__status__marker
 		color: #FEB40B
 
 [data-status = 'pending']
-	div.deal-thumb__base__status__marker
+	.deal-thumb__base__status__marker
 		color: base.$primary-black
 
 	.deal-thumb__base__content__data__funnel
@@ -212,7 +212,7 @@
 	text-align: right
 	color: base.$primary-black
 
-	span
+	.date_value
 		text-align: right
 		flex: 1
 		align-self: stretch
@@ -309,12 +309,11 @@
 	margin: 4px 0px
 	color: base.$green-text
 
-div.daily
-	span.up
+	.up
 		color: base.$green-text
-	span.down
+	.down
 		color: base.$life-red
-	span.zero
+	.zero
 		color: base.$gray-text
 
 .daily.zero

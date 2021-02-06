@@ -86,15 +86,15 @@
   padding: 0 2px 0 0;
 }
 
-[data-status=sales_on] div.deal-thumb__base__status__marker {
+[data-status=sales_on] .deal-thumb__base__status__marker {
   color: #27AE60;
 }
 
-[data-status=sales_off] div.deal-thumb__base__status__marker {
+[data-status=sales_off] .deal-thumb__base__status__marker {
   color: #FEB40B;
 }
 
-[data-status=pending] div.deal-thumb__base__status__marker {
+[data-status=pending] .deal-thumb__base__status__marker {
   color: #303030;
 }
 [data-status=pending] .deal-thumb__base__content__data__funnel {
@@ -216,7 +216,7 @@
   text-align: right;
   color: #303030;
 }
-.base__content__data__dates__table__values span {
+.base__content__data__dates__table__values .date_value {
   text-align: right;
   flex: 1;
   align-self: stretch;
@@ -315,14 +315,13 @@
   margin: 4px 0px;
   color: #219653;
 }
-
-div.daily span.up {
+.daily .up {
   color: #219653;
 }
-div.daily span.down {
+.daily .down {
   color: #D62E27;
 }
-div.daily span.zero {
+.daily .zero {
   color: #666;
 }
 

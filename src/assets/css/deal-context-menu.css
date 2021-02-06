@@ -11,14 +11,14 @@
   width: 0px;
   background: red;
 }
-.context_menu > div {
+.context_menu .menu__list {
   padding: 0 6px 0 0;
   transition-property: padding;
   transition-delay: 0s;
   transition-duration: 0.2s;
   transition-timing-function: ease;
 }
-.context_menu.visible > div {
+.context_menu.visible .menu__list {
   padding: 0;
 }
 .context_menu .menu__list {

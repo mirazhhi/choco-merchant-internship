@@ -16,54 +16,28 @@
 
 	export default {
 		components: { DealThumbnail },
+    
 		data () {
 			return {
 				deals: null,
-				// deal: null
 			}
 		},
-		// mounted: function() {
-		// 	// var routeid = route.query.id
-		// 	// console.log(routeid)
-		// 	fetch('http://localhost:3000/deals')
-		// 		.then((response) => {
-		// 			return response.json()
-		// 		})
-		// 		.then((data) => {
-		// 			this.deals = data
-		// 		})
-		// },
-	  // components: { dealThumbnail },
 
 		created() {
-    	fetch('http://localhost:3000/deals')
+      let gets = location.search.substr(1).split("&").join('&')
+
+    	fetch('http://localhost:3000/deals?' + gets)
 				.then((response) => {
 					return response.json()
 				})
 				.then((data) => {
           if (data) {
+            console.log(data)
   					this.deals = data
-            // console.log(db.deals)
-          }
-          else {
-            this.deal = db.deals
+          } else {
+            this.deals = db.deals
           }
 				})
-	    // const deal = deals.find(deal => deal.id == this.$route.params.id)
-	    // if (deal) {
-	    //   this.deals = [deal]
-      //   console.log(this.$route.params.id);
-			// 	console.log(this.deals)
-	    // }
-			// else {
-			// 	fetch('http://localhost:3000/deals?')
-			// 		.then((response) => {
-			// 			return response.json()
-			// 		})
-			// 		.then((data) => {
-			// 			this.deals = data
-			// 		})
-			// }
   	},
 
 	};
