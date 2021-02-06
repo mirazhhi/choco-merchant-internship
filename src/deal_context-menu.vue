@@ -3,7 +3,7 @@
 		<div class="menu__list">
 			<a
 			v-for="i in actions_list"
-			v-if="!(((status == 'sales_off' || status == 'finished') && i.order == 5) || (status == 'finished' && i.order == 0))"
+			v-if="relevant(status, i.order)"
 			class="menu__list__item"
 			:class="{'iconed': i.icon, 'highlighted': i.highlight}"
 			:href="i.link"
@@ -92,6 +92,15 @@ export default {
   mounted: function() {
     this.status = this.$el.getAttribute('data-status')
   },
+	methods: {
+		relevant: function(s, o) {
+			if (((s == 'sales_off' || s == 'finished') && o == 5) || (s == 'finished' && o == 0)) {
+				return false
+			} else {
+				return true
+			}
+		},
+	},
 };
 </script>
 
