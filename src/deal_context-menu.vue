@@ -94,9 +94,7 @@ export default {
   },
 	methods: {
 		relevant: function(s, o) {
-			if (((s == 'sales_off' || s == 'finished') && o == 5) || (s == 'finished' && o == 0)) {
-				return false
-			} else {
+			if (!(((s == 'sales_off' || s == 'finished') && o == 5) || (s == 'finished' && o == 0))) {
 				return true
 			}
 		},
